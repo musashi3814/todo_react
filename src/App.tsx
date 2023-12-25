@@ -2,10 +2,17 @@ import { useState } from 'react';
 import { Container, Box } from '@mui/material';
 import { TodoForm } from './component/TodoForm';
 import { TodoList } from './component/TodoList';
+import React from 'react';
+
+type Todo = {
+    id: string;
+    title: string;
+    done: boolean;
+};
 
 export default function App () {
-    const [todo, setTodo] = useState('');
-    const [todoList, setTodoList] = useState([]);
+    const [todo, setTodo] = useState<string>('');
+    const [todoList, setTodoList] = useState<Todo[]>([]);
     return (
         <Box>
             <Container maxWidth='xs'>

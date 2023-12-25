@@ -14,9 +14,14 @@ export const TodoForm = (props) => {
             console.log('Todo is empty!');
             return;
         }
+        const newTodo = {
+            id: Math.random().toString(32).substring(2,9), // 乱数を生成
+            title: todo,
+            done: false,
+        };
 
         console.log('addButton:onClick');
-        setTodoList([...todoList, todo]);
+        setTodoList([...todoList, newTodo]);
         setTodo('');
         setButtonClicked(false); // ボタンがクリックされた後はエラーをリセット
     };
