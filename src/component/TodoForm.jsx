@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, TextField, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import axios from 'axios';
 
 
 export const TodoForm = (props) => {
@@ -14,16 +15,31 @@ export const TodoForm = (props) => {
             console.log('Todo is empty!');
             return;
         }
+
+        const currentDate = new Date();
+
         const newTodo = {
-            id: Math.random().toString(32).substring(2,9), // 乱数を生成
+            // id: Math.random().toString(32).substring(2,9), 
+            id: currentDate.getTime(), // ミリ秒単位のUNIXエポック時間
             title: todo,
             done: false,
         };
 
         console.log('addButton:onClick');
+
+        axios.post('http://127.0.0.1:8000/api/add_todo', newTodo)
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
         setTodoList([...todoList, newTodo]);
         setTodo('');
         setButtonClicked(false); // ボタンがクリックされた後はエラーをリセット
+
+        
     };
 
     return (
